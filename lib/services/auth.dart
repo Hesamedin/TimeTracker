@@ -8,7 +8,13 @@ class User {
   final String uid;
 }
 
-class Auth {
+abstract class AuthBase {
+  Future<User> currentUser();
+  Future<User> signInAnonymously();
+  Future<void> signOut();
+}
+
+class Auth implements AuthBase {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   User _userFromFirebase(FirebaseUser user) {
