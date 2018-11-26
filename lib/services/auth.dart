@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:meta/meta.dart';
 
 class User {
@@ -14,6 +15,7 @@ abstract class AuthBase {
   Future<User> currentUser();
   Future<User> signInAnonymously();
   Future<User> signInWithGoogle();
+  Future<User> signInWithFacebook();
   Future<void> signOut();
 }
 
@@ -61,9 +63,26 @@ class Auth implements AuthBase {
     }
   }
 
+  Future<User> signInWithFacebook() async {
+    final facebookLogin = FacebookLogin();
+    FacebookLoginResult result = await facebookLogin.logInWithReadPermissions(
+      ['public_profile'],
+    );
+    if (result.accessToken != null) {
+      FirebaseUser user = await _firebaseAuth.signInWithFacebook(
+        accessToken: result.accessToken.token,
+      );
+      return _userFromFirebase(user);
+    } else {
+      throw StateError('Missing Facebook access token');
+    }
+  }
+
   Future<void> signOut() async {
     final googleSignIn = GoogleSignIn();
     await googleSignIn.signOut();
+    final facebookLogin = FacebookLogin();
+    await facebookLogin.logOut();
     return await _firebaseAuth.signOut();
   }
 }
