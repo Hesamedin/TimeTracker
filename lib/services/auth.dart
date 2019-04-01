@@ -51,7 +51,8 @@ class Auth implements AuthBase {
     return _userFromFirebase(user);
   }
 
-  Future<User> createUserWithEmailAndPassword(String email, String password) async {
+  Future<User> createUserWithEmailAndPassword(
+      String email, String password) async {
     FirebaseUser user = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
     return _userFromFirebase(user);
@@ -64,9 +65,11 @@ class Auth implements AuthBase {
     if (googleUser != null) {
       GoogleSignInAuthentication googleAuth = await googleUser.authentication;
       if (googleAuth.idToken != null && googleAuth.accessToken != null) {
-        FirebaseUser user = await _firebaseAuth.signInWithGoogle(
-          idToken: googleAuth.idToken,
-          accessToken: googleAuth.accessToken,
+        FirebaseUser user = await _firebaseAuth.signInWithCredential(
+          GoogleAuthProvider.getCredential(
+            idToken: googleAuth.idToken,
+            accessToken: googleAuth.accessToken,
+          ),
         );
         return _userFromFirebase(user);
       } else {
@@ -83,8 +86,10 @@ class Auth implements AuthBase {
       ['public_profile'],
     );
     if (result.accessToken != null) {
-      FirebaseUser user = await _firebaseAuth.signInWithFacebook(
-        accessToken: result.accessToken.token,
+      FirebaseUser user = await _firebaseAuth.signInWithCredential(
+        FacebookAuthProvider.getCredential(
+          accessToken: result.accessToken.token,
+        ),
       );
       return _userFromFirebase(user);
     } else {
