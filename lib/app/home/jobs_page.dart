@@ -6,7 +6,6 @@ import 'package:time_tracker_flutter_course/common_widgets/platform_alert_dialog
 import 'package:time_tracker_flutter_course/services/auth.dart';
 
 class JobsPage extends StatelessWidget {
-
   Future<void> _signOut(BuildContext context) async {
     try {
       final auth = Provider.of<AuthBase>(context);
@@ -28,6 +27,10 @@ class JobsPage extends StatelessWidget {
     }
   }
 
+  void _createJob() {
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +49,11 @@ class JobsPage extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: _createJob,
+      ),
     );
   }
+
 }
