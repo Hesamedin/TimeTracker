@@ -49,7 +49,7 @@ class JobsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: temporary code: delete me
     final database = Provider.of<Database>(context);
-    database.readJobs();
+    database.jobsStream();
     return Scaffold(
       appBar: AppBar(
         title: Text('Jobs'),
