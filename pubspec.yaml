@@ -25,6 +25,7 @@ dependencies:
   provider: ^3.0.0+1
   cloud_firestore: ^0.12.1
   intl: ^0.15.8
+  rxdart: ^0.22.1
 
 dev_dependencies:
   flutter_test:
