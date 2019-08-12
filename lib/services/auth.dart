@@ -42,21 +42,21 @@ class Auth implements AuthBase {
   }
 
   Future<User> signInAnonymously() async {
-    FirebaseUser user = await _firebaseAuth.signInAnonymously();
-    return _userFromFirebase(user);
+    final authResult = await _firebaseAuth.signInAnonymously();
+    return _userFromFirebase(authResult.user);
   }
 
   Future<User> signInWithEmailAndPassword(String email, String password) async {
-    FirebaseUser user = await _firebaseAuth.signInWithEmailAndPassword(
+    final authResult = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
-    return _userFromFirebase(user);
+    return _userFromFirebase(authResult.user);
   }
 
   Future<User> createUserWithEmailAndPassword(
       String email, String password) async {
-    FirebaseUser user = await _firebaseAuth.createUserWithEmailAndPassword(
+    final authResult = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
-    return _userFromFirebase(user);
+    return _userFromFirebase(authResult.user);
   }
 
   Future<User> signInWithGoogle() async {
@@ -66,13 +66,13 @@ class Auth implements AuthBase {
     if (googleUser != null) {
       GoogleSignInAuthentication googleAuth = await googleUser.authentication;
       if (googleAuth.idToken != null && googleAuth.accessToken != null) {
-        FirebaseUser user = await _firebaseAuth.signInWithCredential(
+        final authResult = await _firebaseAuth.signInWithCredential(
           GoogleAuthProvider.getCredential(
             idToken: googleAuth.idToken,
             accessToken: googleAuth.accessToken,
           ),
         );
-        return _userFromFirebase(user);
+        return _userFromFirebase(authResult.user);
       } else {
         throw PlatformException(
           code: 'ERROR_MISSING_GOOGLE_AUTH_TOKEN',
@@ -93,12 +93,12 @@ class Auth implements AuthBase {
       ['public_profile'],
     );
     if (result.accessToken != null) {
-      FirebaseUser user = await _firebaseAuth.signInWithCredential(
+      final authResult = await _firebaseAuth.signInWithCredential(
         FacebookAuthProvider.getCredential(
           accessToken: result.accessToken.token,
         ),
       );
-      return _userFromFirebase(user);
+      return _userFromFirebase(authResult.user);
     } else {
       throw PlatformException(
         code: 'ERROR_ABORTED_BY_USER',
