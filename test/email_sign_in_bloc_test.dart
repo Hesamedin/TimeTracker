@@ -17,10 +17,38 @@ void main() {
     bloc.dispose();
   });
 
-  test('WHEN email is updated'
-  'AND password is updated'
-  'AND submit is called'
-  'THEN modelStream emits the correct events', () async {
-    expect(bloc.modelStream, emits(EmailSignInModel()));
+  test(
+      'WHEN email is updated'
+      'AND password is updated'
+      'AND submit is called'
+      'THEN modelStream emits the correct events', () async {
+    expect(
+        bloc.modelStream,
+        emitsInOrder([
+          EmailSignInModel(),
+          EmailSignInModel(email: 'email@email.com'),
+          EmailSignInModel(
+            email: 'email@email.com',
+            password: 'password',
+          ),
+          EmailSignInModel(
+            email: 'email@email.com',
+            password: 'password',
+            submitted: true,
+            isLoading: true,
+          ),
+          EmailSignInModel(
+            email: 'email@email.com',
+            password: 'password',
+            submitted: true,
+            isLoading: false,
+          ),
+        ]));
+
+    bloc.updateEmail('email@email.com');
+
+    bloc.updatePassword('password');
+
+    await bloc.submit();
   });
 }
