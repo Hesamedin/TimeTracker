@@ -142,7 +142,7 @@ SPEC CHECKSUMS:
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: 3a97432acb324b439fbed338e642f9cbb516a63d
   FirebaseInstanceID: ea5af6920d0a4a29b40459d055bebe4a6c1333c4
-  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_facebook_login: 8570fe85a9b988b19503530a85bfce2b3b847145
   google_sign_in: 27e70a98b529f0b076d4b19f231b81da28b1750b
   GoogleAppMeasurement: f7507b39b70ad0bd80b3d81518b2f43868974307
@@ -155,4 +155,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7765ea4305eaab0b3dfd384c7de11902aa3195fd
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.6.1
