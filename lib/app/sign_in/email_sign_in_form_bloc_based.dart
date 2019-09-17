@@ -22,6 +22,7 @@ class EmailSignInFormBlocBased extends StatefulWidget {
     );
   }
 
+
   @override
   _EmailSignInFormBlocBasedState createState() =>
       _EmailSignInFormBlocBasedState();
@@ -29,8 +30,11 @@ class EmailSignInFormBlocBased extends StatefulWidget {
 
 class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
   final TextEditingController _emailController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
+
   final FocusNode _emailFocusNode = FocusNode();
+
   final FocusNode _passwordFocusNode = FocusNode();
 
   @override
@@ -85,7 +89,8 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
     ];
   }
 
-  TextField _buildPasswordTextField(EmailSignInModel model) {
+  TextField _buildPasswordTextField(
+      EmailSignInModel model) {
     return TextField(
       controller: _passwordController,
       focusNode: _passwordFocusNode,

@@ -35,7 +35,8 @@ class EmailSignInModel with EmailAndPasswordValidators {
   }
 
   String get passwordErrorText {
-    bool showErrorText = submitted && !passwordValidator.isValid(password);
+    bool showErrorText =
+        submitted && !passwordValidator.isValid(password);
     return showErrorText ? invalidPasswordErrorText : null;
   }
 
